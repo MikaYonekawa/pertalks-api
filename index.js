@@ -3,7 +3,6 @@ const { google } = require('googleapis');
 const cors = require('cors');
 const app = express();
 
-
 // Carrega as credenciais
 const keys = require('./creds.json');
 
@@ -18,12 +17,12 @@ const sheets = google.sheets({ version: 'v4', auth });
 const SPREADSHEET_ID = '1MP7VNhmXjUUzvIw4rxvBi6hfEM83GfL0P41WjPv060I';
 const SHEET_NAME = 'Página1';
 
+// Middlewares
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // Para application/json
+app.use(express.urlencoded({ extended: true })); // Para application/x-www-form-urlencoded
 
-const cors = require('cors');
-app.use(cors());
-
+// Rota
 app.post('/inscricao', async (req, res) => {
   const { nome, email, telefone, empresa, senha, palestra } = req.body;
 
@@ -44,8 +43,8 @@ app.post('/inscricao', async (req, res) => {
   }
 });
 
+// Inicialização
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
