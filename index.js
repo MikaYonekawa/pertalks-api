@@ -18,7 +18,10 @@ const SPREADSHEET_ID = '1MP7VNhmXjUUzvIw4rxvBi6hfEM83GfL0P41WjPv060I';
 const SHEET_NAME = 'Página1';
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: '*', // libera para qualquer origem
+}));
+
 app.use(express.json()); // Para application/json
 app.use(express.urlencoded({ extended: true })); // Para application/x-www-form-urlencoded
 
