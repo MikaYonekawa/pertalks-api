@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "pertalks-api",
+  "private_key_id": "0b9d8c96be75cf186621cc11943040db91d01f7e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC0fkVE9IQn53Ln\nb1JF/XPogoqSD3B2RIRrV//CH+2EY22xIeZhhsFZq4as3a5Reug94axllSZm5M+G\nqT3wvzmAAY/W4YFYgH5oBxf40HSpPsV+zWCvH+EvPph6/emwom8i9oq31nBdVeVu\novpBKmmW+GSd4e5sI+DAs3KfurpntRpppGF5j3w7/d5j3HH886LRjopcKzBdv3D0\n7Wnj5jqGDZWUXREwa7NTyR+Y1YahQVGhOfhVZLqjtMjL8pDze/dlCtBjYniULswG\np751ZcOTzhtjuwFHqjwVED7VvfYtw182VMvkoRaEU6Y24hJjrMrN7NS5S37Fsc0n\nmta+WdtzAgMBAAECggEABvjPrSuyxSXUEuuCZpC1Pvh36M9u3SqlYM4b44A/OPts\nO8je8Mp3QoL1J01C1APm36kNczkRLC1PdNipu1hvnKmyyC6aw/PmrhcEDoji0LzL\nfSvqvakCFkSZODsBoWCM4XFbh2FhosFUJPNnrke4n2vF2zFkd8nk/xyPY2sfkyzj\nhShjRWlsdZ4uFIqeDXoiI5whBziykIKzhMTGw5A7nReIIHfvoOanN0Q/u1MYQzX0\nNeiIdBsdD9D4U/1QnfAp7z7UwFLLlJgxO8z9IF4Gg+kUbj+22EszBsVDkyzR/nnI\nXpY6kAe8kZtLJoIFha81f8xFWWcc5RbVCqGsNs3YlQKBgQDrSZWa2uaqLgaicrdm\nACLvGl/zVTlZC32gGDdHdabk+RiD9fRrL+c/9iHRjTM6zztoPUEIMjabj4Ksbpn8\nI9XdnDZQEgmut93BCb9cisr+S0mNJ7B5/RKwq6fi9sYWhB+iJXpyr+/14rjcAl5s\n8ukKFXa0L/iga1us9wDzR6TxtwKBgQDEYdlwbiZhmTOv9iFlk1J8OTPilU6YWXXx\nenAaALp8zh5BZpS6v9Gl/MdPtOK0WoVjg4yyYtUDOc+zZm7RdgXhNroblLEhsxSJ\nWGd0VfwduWpHackxFK/8EabR1yRANTc/BpQm64w0304pO6BP9+Vby9mrqwCfiIco\nlkLvmeR0JQKBgQC3hHyA/U4+3IlmOY3crCyTTIIcfJOvZWwF6/1p6lVTcQrzGmsb\nE5EObX8xQC3+J9cRVf2cU/YN3aCxt865QIY2RPqD952/vj/jqiOtHcB5GeXziEp4\ny7DBRhI7z/jvZPx7bzoTrDDBG6bOS7a0yb6Ek/szTdth3Hrz7PC70FzR/wKBgC5P\noPZpk3WKqmzBj2ij0FzpJHo3mZxF5JF4vTz0lQXfmbT0mvhbSfZp4RrD3n6HplMs\nb56VvgQPuxJkgpe0zHgq7sKYUxlOYPZuuZ7utBDSa+TBZqfDaCj6hKuRn8PgiNG9\nHGz9OUgyrPz+SbTyEc2PChr4raHxkWYZ4VkdooldAoGATW1U+MrMg7VNSgOyN+DS\nSpNwpM3mo1kShaG5AyThDnE19NE9C/eBb3MKj6s9D4FjO4uPZyCshh23GpRWUGrI\nCEP2JOyBGYVosXgitNklBAzKD2FQyMzxOCP77/CJTMaELIsHg0yOR1OCp1qFyg7b\nfV2hmRmjWWVex4dQqG22vEE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pertalks-api-service@pertalks-api.iam.gserviceaccount.com",
+  "client_id": "104699692822257204188",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pertalks-api-service%40pertalks-api.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

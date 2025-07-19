@@ -1,0 +1,23 @@
+{
+  "name": "pertalks-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "scripts": {
+  "start": "node index.js"
+},
+
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "googleapis": "^153.0.0",
+    "l": "^0.6.0"
+  }
+  
+}
