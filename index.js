@@ -42,7 +42,8 @@ app.post('/inscricao', async (req, res) => {
     res.status(200).json({ message: 'Inscrição recebida com sucesso!' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Erro ao enviar dados para o Google Sheets.' });
+console.error('Erro ao salvar no Sheets:', error.response?.data || error.message || error);
+
   }
 });
 
