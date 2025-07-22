@@ -41,7 +41,7 @@ app.post('/inscricao', async (req, res) => {
 
     res.status(200).json({ message: 'Inscrição recebida com sucesso!' });
   } catch (error) {
-    console.error(error);
+   // console.error(error);
 console.error('Erro ao salvar no Sheets:', error.response?.data || error.message || error);
 
   }
