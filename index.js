@@ -21,8 +21,8 @@ const MAX_INSCRITOS = 100;
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'seuemail@gmail.com',
-    pass: 'sua-senha-de-app' // use "senha de app" do Gmail
+    user: 'contatopertalks@gmail.com',
+    pass: 'pocx lqyn tiuk brgs' // use "senha de app" do Gmail
   }
 });
 
