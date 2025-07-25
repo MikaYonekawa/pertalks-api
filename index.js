@@ -1,65 +1,72 @@
 const express = require('express');
-const { google } = require('googleapis');
+const admin = require('firebase-admin');
 const cors = require('cors');
+const fs = require('fs');
+const nodemailer = require('nodemailer');
+
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-// Carrega as credenciais
-const keys = {
-  type: 'service_account',
-  project_id: 'pertalks-api',
-  private_key_id: '9a82d06b23478d187f34520efd51b4be39896e51',
-  private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-  client_email: process.env.GOOGLE_CLIENT_EMAIL,
-  client_id: '104699692822257204188',
-  auth_uri: 'https://accounts.google.com/o/oauth2/auth',
-  token_uri: 'https://oauth2.googleapis.com/token',
-  auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
-  client_x509_cert_url: 'https://www.googleapis.com/robot/v1/metadata/x509/pertalks-api-service%40pertalks-api.iam.gserviceaccount.com'
-};
-
-
-// Configura o Google Sheets API
-const auth = new google.auth.GoogleAuth({
-  credentials: keys,
-  scopes: ['https://www.googleapis.com/auth/spreadsheets']
+// Inicializa Firebase Admin
+const serviceAccount = require('./firebase-creds.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
 });
-const sheets = google.sheets({ version: 'v4', auth });
+const db = admin.firestore();
 
-// ID da planilha e nome da aba
-const SPREADSHEET_ID = '1MP7VNhmXjUUzvIw4rxvBi6hfEM83GfL0P41WjPv060I';
-const SHEET_NAME = 'Página1';
+const MAX_INSCRITOS = 100;
 
-// Middlewares
-app.use(cors({
-  origin: '*', // libera para qualquer origem
-}));
+// Configuração de email (exemplo usando Gmail)
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'seuemail@gmail.com',
+    pass: 'sua-senha-de-app' // use "senha de app" do Gmail
+  }
+});
 
-app.use(express.json()); // Para application/json
-app.use(express.urlencoded({ extended: true })); // Para application/x-www-form-urlencoded
-
-// Rota
+// Rota de inscrição
 app.post('/inscricao', async (req, res) => {
   const { nome, email, telefone, empresa, senha, palestra } = req.body;
 
   try {
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: SPREADSHEET_ID,
-      range: `${SHEET_NAME}!A:F`,
-      valueInputOption: 'USER_ENTERED',
-      resource: {
-        values: [[nome, email, telefone, empresa, senha, palestra]]
-      }
+    const inscritosRef = db.collection('inscritos');
+
+    // Verifica duplicado
+    const existe = await inscritosRef.where('email', '==', email).get();
+    if (!existe.empty) {
+      return res.status(400).json({ message: 'Email já inscrito.' });
+    }
+
+    // Verifica limite
+    const total = await inscritosRef.get();
+    if (total.size >= MAX_INSCRITOS) {
+      return res.status(400).json({ message: 'Limite de inscritos atingido.' });
+    }
+
+    // Salva no Firestore
+    await inscritosRef.add({
+      nome, email, telefone, empresa, senha, palestra, data: new Date().toISOString()
     });
 
-    res.status(200).json({ message: 'Inscrição recebida com sucesso!' });
-  } catch (error) {
-   // console.error(error);
-console.error('Erro ao salvar no Sheets:', error.response?.data || error.message || error);
+    // Envia email de confirmação
+    await transporter.sendMail({
+      from: 'Pertalks <seuemail@gmail.com>',
+      to: email,
+      subject: 'Confirmação de Inscrição - Pertalks',
+      text: `Olá ${nome}, sua inscrição para a palestra "${palestra}" foi confirmada.`
+    });
 
+    res.status(200).json({ message: 'Inscrição concluída com sucesso!' });
+
+  } catch (error) {
+    console.error('Erro na inscrição:', error);
+    res.status(500).json({ message: 'Erro interno ao processar inscrição.' });
   }
 });
 
-// Inicialização
+// Inicializa servidor
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
