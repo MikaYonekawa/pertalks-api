@@ -1,0 +1,35 @@
+from flask import Flask, request
+from flask_cors import CORS
+
+import smtplib
+from email.mime.text import MIMEText
+
+app = Flask(__name__)
+CORS(app) 
+
+EMAIL = 'contatopertalks@gmail.com'
+SENHA = 'nydt yexb grcn ofxk'
+
+@app.route('/enviar-email', methods=['POST'])
+def enviar_email():
+    dados = request.get_json()
+    nome = dados.get('nome')
+    email = dados.get('email')
+    titulo = dados.get('palestra')
+    senha_palestra = dados.get('senha')
+
+    msg = MIMEText(f"Olá {nome or 'participante'},\n\nVocê está inscrito na palestra '{titulo}'.\n\nSenha de acesso: {senha_palestra}\n\nAté lá!")
+    msg['Subject'] = f"Confirmação de Inscrição - {titulo}"
+    msg['From'] = EMAIL
+    msg['To'] = email
+
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL, SENHA)
+            smtp.send_message(msg)
+        return {'status': 'ok', 'mensagem': 'E-mail enviado com sucesso!'}
+    except Exception as e:
+        return {'status': 'erro', 'mensagem': str(e)}, 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
