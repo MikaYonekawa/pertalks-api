@@ -18,7 +18,7 @@ def enviar_email():
     titulo = dados.get('palestra')
     senha_palestra = dados.get('senha')
 
-    msg = MIMEText(f"Olá {nome or 'participante'},\nObrigado por se inscrever na plestra '{titulo}'.\nAqui está a sua senha de acesso: {senha_palestra}\nGuarde essa senha para acessar o evento. Você a usará no aplicativo para fazer o check-in no local.\n\nAinda não baixou o app Pertalks? Clique aqui: www.pertalks.com.br\n\nAtenciosamente,\nEquipe do evento")
+    msg = MIMEText(f"Olá {nome or 'participante'},\nObrigado por se inscrever na palestra '{titulo}'.\nAqui está a sua senha de acesso: {senha_palestra}\nGuarde essa senha para acessar o evento. Você a usará no aplicativo para fazer o check-in no local.\n\nAinda não baixou o app Pertalks? Clique aqui: www.pertalks.com.br\n\nAtenciosamente,\nEquipe do evento")
     msg['Subject'] = f"Confirmação de Inscrição - {titulo}"
     msg['From'] = EMAIL
     msg['To'] = email
